@@ -1,0 +1,260 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 48%;
+    --radius: 0.75rem;
+    /* Destinote theme tokens (used by navbar/background/globe) */
+    --dn-nav-bg: rgba(0, 0, 0, 0.40);
+    --dn-nav-border: rgba(255, 255, 255, 0.10);
+    --dn-nav-fg: rgba(255, 255, 255, 0.95);
+    --dn-overlay: rgba(0, 0, 0, 0.30);
+    --dn-overlay-strong: rgba(0, 0, 0, 0.45);
+    /* Override TEMPORÁRIO (menu no logo) + Override por tema */
+    --dn-card-override-temp: none;
+    /* não persiste */
+    --dn-card-override: none;
+    /* cor única p/ todos os cards */
+    --dn-card-override-odd: none;
+    /* alternância */
+    --dn-card-override-even: none;
+    /* alternância */
+  }
+
+  html[data-dn-theme='default'] {
+    --dn-card-override: none;
+    --dn-card-override-odd: none;
+    --dn-card-override-even: none;
+  }
+
+  html[data-dn-theme='dark'] {
+    /* Épico = #000000 no seu seed (categories.csv) */
+    --dn-card-override: #000000;
+    --dn-card-override-odd: none;
+    --dn-card-override-even: none;
+  }
+
+  html[data-dn-theme='holiday'] {
+    /* Desafio = #E60D00 (vermelho) / Assistir = #137021 (verde) */
+    --dn-card-override: none;
+    --dn-card-override-odd: #E60D00;
+    /* id ímpar => vermelho */
+    --dn-card-override-even: #137021;
+    /* id par => verde */
+  }
+
+
+}
+
+html[data-dn-theme='default'] {
+  /* explicit default hook (optional) */
+}
+
+html[data-dn-theme='dark'] {
+  --background: 0 0% 2%;
+  --foreground: 0 0% 98%;
+  --card: 0 0% 5%;
+  --card-foreground: 0 0% 98%;
+  --popover: 0 0% 5%;
+  --popover-foreground: 0 0% 98%;
+  --primary: 0 0% 0%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 0 0% 12%;
+  --secondary-foreground: 0 0% 100%;
+  --accent: 0 0% 12%;
+  --accent-foreground: 0 0% 98%;
+  --ring: 0 0% 85%;
+
+  --dn-nav-bg: rgba(255, 255, 255, 0.85);
+  --dn-nav-border: rgba(0, 0, 0, 0.12);
+  --dn-nav-fg: rgba(0, 0, 0, 0.92);
+  --dn-overlay: rgba(0, 0, 0, 0.55);
+  --dn-overlay-strong: rgba(0, 0, 0, 0.72);
+}
+
+html[data-dn-theme='holiday'] {
+  --background: 222.2 84% 4.9%;
+  --foreground: 0 0% 98%;
+
+  /* Vermelho (botões) */
+  --primary: 0 75% 45%;
+  --primary-foreground: 0 0% 100%;
+
+  /* Verde (secundários) */
+  --secondary: 135 45% 20%;
+  --secondary-foreground: 0 0% 98%;
+
+  /* Card vinho */
+  --card: 355 70% 12%;
+  --card-foreground: 0 0% 98%;
+
+  /* Dourado */
+  --accent: 48 96% 55%;
+  --accent-foreground: 0 0% 10%;
+  --ring: 48 96% 55%;
+
+  --dn-nav-bg: rgba(180, 20, 20, 0.65);
+  --dn-nav-border: rgba(255, 215, 0, 0.22);
+  --dn-nav-fg: rgba(255, 255, 255, 0.95);
+  --dn-overlay: rgba(0, 0, 0, 0.35);
+  --dn-overlay-strong: rgba(0, 0, 0, 0.48);
+}
+
+* {
+  border-color: hsl(var(--border));
+}
+
+html,
+body {
+  min-height: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-feature-settings: 'rlig' 1, 'calt' 1;
+  -webkit-font-smoothing: antialiased;
+}
+
+@layer utilities {
+  .dn-nav-shell {
+    background: var(--dn-nav-bg);
+    border-color: var(--dn-nav-border);
+  }
+
+  .dn-nav-shell,
+  .dn-nav-shell * {
+    color: var(--dn-nav-fg);
+  }
+
+  .dn-bg-overlay {
+    background: var(--dn-overlay);
+  }
+
+  .dn-bg-overlay-strong {
+    background: var(--dn-overlay-strong);
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.25);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(129, 140, 248, 0.6);
+    border-radius: 999px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(129, 140, 248, 0.9);
+  }
+}
+
+/* Animações utilitárias */
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-18px);
+  }
+}
+
+@keyframes pulseNeon {
+  0% {
+    opacity: 0.6;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0.6;
+  }
+}
+
+@keyframes destinote-float {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+
+  35% {
+    transform: translate3d(var(--float-x, 2px), calc(var(--float-y, 3px) * -1), 0) rotate(var(--float-r, 0.35deg));
+  }
+
+  70% {
+    transform: translate3d(calc(var(--float-x, 2px) * -1), var(--float-y, 3px), 0) rotate(calc(var(--float-r, 0.35deg) * -1));
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+}
+
+.destinote-idle-float {
+  will-change: transform;
+  animation: destinote-float var(--float-dur, 10s) ease-in-out infinite;
+  animation-delay: var(--float-delay, 0s);
+}
+
+/* Respeita acessibilidade e também deixa mobile mais leve */
+@media (prefers-reduced-motion: reduce) {
+  .destinote-idle-float {
+    animation: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .destinote-idle-float {
+    animation-duration: calc(var(--float-dur, 10s) * 1.15);
+  }
+}
+
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #6dd5ff 0%, #b829ff 35%, #ffd25a 80%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* .neon-glow {
+  text-shadow: 0 0 5px #b829ff, 0 0 10px #b829ff, 0 0 20px #b829ff,
+    0 0 40px #b829ff, 0 0 80px #b829ff;
+} */
