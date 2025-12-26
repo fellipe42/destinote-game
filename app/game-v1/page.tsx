@@ -18,14 +18,14 @@ import {
   endPhase1Voting,
   finalizePhase2,
   goToFinalRank,
-  goToSecretRank,
   startGame,
   startPhase1Voting,
   submitAction,
-  submitFinalOrdering,
-  submitSecretRanking,
+  submitFinalRanking,
   continueAfterPhase1Results,
+  goToDiscuss,
 } from '@/lib/game/v1/engine';
+
 
 import { clearSavedGame, hasSavedGame, loadSavedGame, saveGame } from '@/lib/game/v1/storage';
 import { loadThemeBank } from '@/lib/game/v1/bank';
@@ -294,7 +294,11 @@ export default function GameV1Page() {
         <Phase2Ordering
           game={game}
           title="Fase 2 — Ordene (final)"
-          onConfirm={(ordering) => setGame((g) => submitFinalOrdering(g!, ordering))}
+          onConfirm ={(ordering) => {
+            const ranker = game.players[game.p2?.currentRankerIndex ?? 0];
+            setGame((g) => submitFinalRanking(g!, ranker.id, ordering));
+          }}
+
           onFinish={() => setGame((g) => finalizePhase2(g!))}
         />
       ) : null}
